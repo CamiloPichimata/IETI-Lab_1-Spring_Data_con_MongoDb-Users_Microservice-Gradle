@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Document
 public class User {
@@ -18,17 +18,18 @@ public class User {
 
     private String lastName;
 
-    private Date createdAt;
+    private String createdAt;
 
-    public User(Integer id, String name, String email, String lastName, Date createdAt) {
+    public User(Integer id, String name, String email, String lastName) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.lastName = lastName;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDate.now().toString();
     }
 
     public User() {
+        this.createdAt = LocalDate.now().toString();
     }
 
     public Integer getId() {
@@ -63,11 +64,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 }

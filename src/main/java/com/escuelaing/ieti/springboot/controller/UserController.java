@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -108,4 +109,39 @@ public class UserController {
     }
 
 
+    @GetMapping("/api/findUsersWithNameOrLastname/{queryText}")
+    public ResponseEntity<List<UserDto>> findUsersWithNameOrLastname (@PathVariable String queryText) {
+        try {
+            List<User> users = userService.findUsersWithNameOrLastNameLike(queryText);
+            ArrayList<UserDto> data = new ArrayList<UserDto>();
+            if (!users.isEmpty()) {
+                for (User u : users) {
+                    data.add(modelMapper.map(u, UserDto.class));
+                }
+            }
+            return new ResponseEntity<List<UserDto>> (data, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println("\n------------------------------------------------------------------------------");
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/api/findUsersCreatedAfter/{startDate}")
+    public ResponseEntity<List<UserDto>> findUsersCreatedAfter (@PathVariable Date startDate) {
+        try {
+            List<User> users = userService.findUsersCreatedAfter(startDate);
+            ArrayList<UserDto> data = new ArrayList<UserDto>();
+            if (!users.isEmpty()) {
+                for (User u : users) {
+                    data.add(modelMapper.map(u, UserDto.class));
+                }
+            }
+            return new ResponseEntity<List<UserDto>> (data, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println("\n------------------------------------------------------------------------------");
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

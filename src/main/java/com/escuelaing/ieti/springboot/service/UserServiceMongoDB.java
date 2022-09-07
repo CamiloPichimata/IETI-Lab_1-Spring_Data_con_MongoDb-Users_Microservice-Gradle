@@ -3,8 +3,10 @@ package com.escuelaing.ieti.springboot.service;
 import com.escuelaing.ieti.springboot.entities.User;
 import com.escuelaing.ieti.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,19 +21,23 @@ public class UserServiceMongoDB implements UserService {
 
     @Override
     public User create(User user) {
-        if (userRepository.existsById(user.getId().toString())) {
-            return null;
-        } else {
+        try {
             userRepository.insert(user);
-            Optional<User> userTemp = userRepository.findById(user.getId().toString());
+            String id = user.getId().toString();
+            Optional<User> userTemp = userRepository.findById(id);
+            System.out.println("User Registered: " + userTemp);
             return userTemp.orElse(null);
+        } catch (DuplicateKeyException e) {
+            System.out.println("The specified id is already registered");
+            return null;
         }
     }
 
     @Override
     public User findById(String id) {
         Optional<User> userTemp = userRepository.findById(id);
-        return userTemp.orElse(null);
+        //return userTemp.orElse(null);
+        return userRepository.findById(id).get();
     }
 
     @Override
@@ -56,5 +62,17 @@ public class UserServiceMongoDB implements UserService {
         } else {
             return null;
         }
+    }
+
+
+    @Override
+    public List<User> findUsersWithNameOrLastNameLike(String queryText) {
+        return userRepository.findByNameOrLastName(queryText, queryText);
+    }
+
+    @Override
+    public List<User> findUsersCreatedAfter(Date startDate) {
+        return userRepository.findByCreatedAtAfter(startDate);
+        //return null;
     }
 }

@@ -3,10 +3,7 @@ package com.escuelaing.ieti.springboot.service;
 import com.escuelaing.ieti.springboot.entities.User;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 //@Service
 public class UserServiceHashMap implements UserService{
@@ -45,5 +42,16 @@ public class UserServiceHashMap implements UserService{
             users.replace(Integer.parseInt(userId), user);
         }
         return users.get(Integer.parseInt(userId));
+    }
+
+
+    @Override
+    public List<User> findUsersWithNameOrLastNameLike(String queryText) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<User> findUsersCreatedAfter(Date startDate) {
+        throw new UnsupportedOperationException();
     }
 }
