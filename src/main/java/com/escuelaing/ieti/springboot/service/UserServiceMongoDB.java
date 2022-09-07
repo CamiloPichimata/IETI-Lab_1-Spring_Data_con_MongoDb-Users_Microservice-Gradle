@@ -3,9 +3,12 @@ package com.escuelaing.ieti.springboot.service;
 import com.escuelaing.ieti.springboot.entities.User;
 import com.escuelaing.ieti.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class UserServiceMongoDB implements UserService {
 
     private final UserRepository userRepository;
@@ -20,27 +23,38 @@ public class UserServiceMongoDB implements UserService {
             return null;
         } else {
             userRepository.insert(user);
-            return userRepository.findById(user.getId().toString()).get();
+            Optional<User> userTemp = userRepository.findById(user.getId().toString());
+            return userTemp.orElse(null);
         }
     }
 
     @Override
     public User findById(String id) {
-        return null;
+        Optional<User> userTemp = userRepository.findById(id);
+        return userTemp.orElse(null);
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
     public boolean deleteById(String id) {
-        return false;
+        try {
+            userRepository.deleteById(id);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     @Override
     public User update(User user, String userId) {
-        return null;
+        if (userRepository.existsById(userId)) {
+            return userRepository.save(user);
+        } else {
+            return null;
+        }
     }
 }

@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-@Service
+//@Service
 public class UserServiceHashMap implements UserService{
     private HashMap<Integer, User> users = new HashMap<Integer, User>();
 
