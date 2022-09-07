@@ -100,7 +100,7 @@ Si damos click en el emoticón del campo de texto *Environment variables* se abr
 
 <img src='img/cluster_connect-5.png'> 
 
-Finalmente agregamos la dependencia *Spring Boot starter data MongoDB* al archivo ***build.gradle*** y ejecutamos la aplicación para verificar que la conexión se realizó satisfactoriamente 
+Para terminar agregamos la dependencia *Spring Boot starter data MongoDB* al archivo ***build.gradle*** y ejecutamos la aplicación para verificar que la conexión se realizó satisfactoriamente 
 
 ```conf
 dependencies {
