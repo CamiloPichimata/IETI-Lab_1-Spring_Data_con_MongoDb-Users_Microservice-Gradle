@@ -76,11 +76,27 @@ Seguido a esto agregamos una variable de entorno al archivo ***application.prope
 spring.data.mongodb.uri=${MONGODB_URI}
 ```
 
-En IntelliJ Idea damos click derecho sobre la carpeta que contiene el proyecto y seleccionamos la opción `Modify Run Configuration...` con el fin de agregar la variable de entorno a las configuraciones de ejecución
+Antes de agregar la variable de entorno a las configuraciones de ejecución debemos crear nuestra base de datos, para esto regresamos de nuevo a la pantalla principal en la interfaz de usuario de MongoDB y damos click en la opción `Browse Collections`
+
+<img src='img/create_db.png'> 
+
+Damos click en la opción `Add My Own Data` para crear la primera base de datos de nustro cluster
+
+<img src='img/create_db-2.png'> 
+
+Rellenamos los campos con los nombres que deseamos para nuestra primera base de datos y colección y damos click en el botón `Create`
+
+<img src='img/create_db-3.png'>
+
+Al crearse la base de datos podemos visualizarla desde la opción `Browse Collections` desde la pestaña `Collections` como se ve a continuación
+
+<img src='img/create_db-4.png'>
+
+Tesrminado esto ingresamos a IntelliJ Idea, damos click derecho sobre el icono que permite la ejecución de la aplicación desde la clase principal o el método main del proyecto y seleccionamos la opción `Modify Run Configuration...` con el fin de agregar la variable de entorno a las configuraciones de ejecución
 
 <img src='img/cluster_connect-4.png'> 
 
-Si damos click en el emoticón del campo de texto *Environment variables* se abre una nueva ventana (A la derecha) en la que podemos definir el link de conexión generado al escojer el driver y versión para Java, en este debemos reemplazar ***<password>*** por la contrasena especificada al crear el usuario ***camilopichimata***
+Si damos click en el emoticón del campo de texto *Environment variables* se abre una nueva ventana (A la derecha) en la que podemos definir el link de conexión generado al escoger el driver y versión para Java, en este debemos reemplazar ***\<password\>*** por la contrasena especificada al crear el usuario ***camilopichimata*** y se debe especificar el nombre de la base de datos creada anteriormente, en nuestro caso ***UsersDB***
 
 <img src='img/cluster_connect-5.png'> 
 
