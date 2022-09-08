@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -23,8 +24,7 @@ public class UserServiceMongoDB implements UserService {
     public User create(User user) {
         try {
             userRepository.insert(user);
-            String id = user.getId().toString();
-            Optional<User> userTemp = userRepository.findById(id);
+            Optional<User> userTemp = userRepository.findById(user.getId());
             System.out.println("User Registered: " + userTemp);
             return userTemp.orElse(null);
         } catch (DuplicateKeyException e) {
@@ -35,9 +35,15 @@ public class UserServiceMongoDB implements UserService {
 
     @Override
     public User findById(String id) {
-        Optional<User> userTemp = userRepository.findById(id);
-        //return userTemp.orElse(null);
-        return userRepository.findById(id).get();
+        try {
+            System.out.println("idTemp = " + id);
+            Optional<User> userTemp = userRepository.findById(id);
+            return userTemp.orElse(null);
+            //return userTemp.get();
+        } catch (NoSuchElementException e) {
+            System.out.println("The specified id is not registered");
+            return null;
+        }
     }
 
     @Override
@@ -60,6 +66,7 @@ public class UserServiceMongoDB implements UserService {
         if (userRepository.existsById(userId)) {
             return userRepository.save(user);
         } else {
+            System.out.println("The specified id is not registered");
             return null;
         }
     }

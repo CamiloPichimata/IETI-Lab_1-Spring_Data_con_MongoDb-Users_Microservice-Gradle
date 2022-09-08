@@ -7,7 +7,7 @@ import java.util.*;
 
 //@Service
 public class UserServiceHashMap implements UserService{
-    private HashMap<Integer, User> users = new HashMap<Integer, User>();
+    private HashMap<String, User> users = new HashMap<String, User>();
 
     @Override
     public User create(User user) {
@@ -39,7 +39,7 @@ public class UserServiceHashMap implements UserService{
     @Override
     public User update(User user, String userId) {
         if (users.containsKey(Integer.parseInt(userId))) {
-            users.replace(Integer.parseInt(userId), user);
+            users.replace(userId, user);
         }
         return users.get(Integer.parseInt(userId));
     }

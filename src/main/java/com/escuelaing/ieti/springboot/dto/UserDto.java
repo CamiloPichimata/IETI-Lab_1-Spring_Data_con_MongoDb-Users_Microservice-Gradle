@@ -3,13 +3,13 @@ package com.escuelaing.ieti.springboot.dto;
 import java.time.LocalDate;
 
 public class UserDto {
-    private Integer id;
+    private String id;
     private String name;
     private String email;
     private String lastName;
     private String createdAt;
 
-    public UserDto (Integer id, String name, String email, String lastName) {
+    public UserDto (String id, String name, String email, String lastName) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -21,11 +21,11 @@ public class UserDto {
         this.createdAt = LocalDate.now().toString();
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

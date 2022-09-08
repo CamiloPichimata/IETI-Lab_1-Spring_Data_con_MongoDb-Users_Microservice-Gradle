@@ -68,7 +68,10 @@ public class UserController {
             } else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
-
+        } catch (IllegalArgumentException iae) {
+            System.out.println("\n------------------------------------------------------------------------------");
+            System.out.println("IllegalArgumentException: The argument userDTO is null");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             System.out.println("\n------------------------------------------------------------------------------");
             e.printStackTrace();
