@@ -25,7 +25,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/api/v2/users")
     public ResponseEntity<List<UserDto>> getAll() {
         try {
             List<User> users = userService.getAll();
@@ -43,7 +43,7 @@ public class UserController {
         }
     }
 
-    @GetMapping( "/{id}" )
+    @GetMapping( "/api/v2/users/{id}" )
     public ResponseEntity<UserDto> findById( @PathVariable String id ) {
         try {
             User userTemp = userService.findById(id);
@@ -59,7 +59,7 @@ public class UserController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/api/v2/users")
     public ResponseEntity<UserDto> create( @RequestBody UserDto userDto ) {
         try {
             User newUser = userService.create(modelMapper.map(userDto, User.class));
@@ -79,7 +79,7 @@ public class UserController {
         }
     }
 
-    @PutMapping( "/{id}" )
+    @PutMapping( "/api/v2/users/{id}" )
     public ResponseEntity<UserDto> update( @RequestBody UserDto user, @PathVariable String id) {
         try {
             User userTemp = userService.update(modelMapper.map(user, User.class), id);
@@ -95,7 +95,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping( "/{id}" )
+    @DeleteMapping( "/api/v2/users/{id}" )
     public ResponseEntity<Boolean> delete( @PathVariable String id ) {
         try {
             boolean deleted = userService.deleteById(id);
@@ -112,7 +112,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/api/findUsersWithNameOrLastname/{queryText}")
+    @GetMapping("/api/v2/users/findUsersWithNameOrLastname/{queryText}")
     public ResponseEntity<List<UserDto>> findUsersWithNameOrLastname (@PathVariable String queryText) {
         try {
             List<User> users = userService.findUsersWithNameOrLastNameLike(queryText);
@@ -130,7 +130,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/api/findUsersCreatedAfter/{startDate}")
+    @GetMapping("/api/v2/users/findUsersCreatedAfter/{startDate}")
     public ResponseEntity<List<UserDto>> findUsersCreatedAfter (@PathVariable Date startDate) {
         try {
             List<User> users = userService.findUsersCreatedAfter(startDate);
