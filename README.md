@@ -126,7 +126,7 @@ Después de seguir las instrucciones y de realizar las implementaciones necesari
 
 #### - Create
 
-Se le pide al servicio crear un usuario mediante el envío de una petición `POST` a `http://localhost:8080` con las siguientes características:
+Se le pide al servicio crear un usuario mediante el envío de una petición `POST` a `http://localhost:8080/api/v2/users` con las siguientes características:
 
 ```json
 {"id": "1", "name": "Camilo", "email": "camilo@gmail.com", "lastName": "Pérez"}
@@ -150,7 +150,7 @@ En este caso el código de respuesta ya es satisfactorio.
 
 #### - Get All
 
-Se realiza una petición `GET` a la dirección `http://localhost:8080` con el fin de obtener los usuarios registrados en el sistema hasta el momento.
+Se realiza una petición `GET` a la dirección `http://localhost:8080/api/v2/users` con el fin de obtener los usuarios registrados en el sistema hasta el momento.
 
 <img src='img/test-getAll.png'>
 
@@ -161,13 +161,13 @@ Si verificamos desde la aplicación web de Mongo podemos ver los dos usuarios re
 
 #### - Find By Id
 
-Se realiza nuevamente una petición `GET` a la dirección `http://localhost:8080/1`, pero como se puede ver, indicando en el path de la dirección el ***id*** del usuario a consultar, en este caso vamos a consultar el primer usuario registrado anteriormente
+Se realiza nuevamente una petición `GET` a la dirección `http://localhost:8080/api/v2/users/1`, pero como se puede ver, indicando en el path de la dirección el ***id*** del usuario a consultar, en este caso vamos a consultar el primer usuario registrado anteriormente
 
 <img src='img/test-findById.png'>
 
 #### - Update
 
-Se realiza una petición `POST` nuevamente indicando en la dirección el ***id*** del usuario a modificar, en este caso modificaremos los datos del segundo usuario registrado enviando la siguiente información:
+Se realiza una petición `POST` a `http://localhost:8080/api/v2/users/2` nuevamente indicando en la dirección el ***id*** del usuario a modificar, en este caso modificaremos los datos del segundo usuario registrado enviando la siguiente información:
 
 ```json
 {"id": "2", "name": "Juan Pablo", "email": "pablolopez@mail.com", "lastName": "López Niño"}
@@ -179,7 +179,7 @@ Como se puede ver en la respuesta del mensaje, los cambios se realizaron correct
 
 #### - Delete
 
-Finalmente enviamos una petición `DEL` a `http://localhost:8080/1`, como se puede ver, indicando el ***id*** del primer usuario registrado con el fin de eliminar su registro:
+Finalmente enviamos una petición `DEL` a `http://localhost:8080/api/v2/users/1`, como se puede ver, indicando el ***id*** del primer usuario registrado con el fin de eliminar su registro:
 
 <img src='img/test-delete.png'>
 
