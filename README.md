@@ -186,3 +186,33 @@ Finalmente enviamos una petición `DEL` a `http://localhost:8080/api/v2/users/1`
 Como se puede ver el código de la respuesta es satisfactorio **200 (OK)** y en el cuerpo del mensaje **true** lo que nos indica que la eliminación del registro se realizó correctamente; Si realizamos nuevamente una petición de todos los usuarios podemos ver en la lista de usuarios que solo se encuentra el segundo usuario registrado:
 
 <img src='img/test-delete-2.png'>
+
+### Challenge: Implementar consultas complejas utilizando los métodos de consulta de datos de Spring
+
+Después de realizadas las implementaciones necesarias para realizar las consultas especificadas, se realizaron las siguientes pruebas registrando nuevamente los dos usuarios ingresados en las pruebas anteriores:
+
+<img src='img/test-challenge.png'>
+
+#### - Find Users with *Name* or *LastName*
+
+Se realizó una petición `GET` a la dirección `http://localhost:8080/api/v2/users/findUsersWithNameOrLastname/Camilo` que como se puede ver en este caso especifica la consulta a realizar (Encontrar los usuarios que estén registrados con el nombre o apellido especificado) y un parámetro de consulta `Camilo`:
+
+<img src='img/test-challenge_1.png'>
+
+Como se puede ver en el cuerpo de la respuesta se encuentra un solo usuario registrado en la base de datos con ese nombre; Ahora vamos a buscar el otro usuario registrado enviando como parámetro su apellido, para esto realizamos nuevamente una petición `GET` a la dirección `http://localhost:8080/api/v2/users/findUsersWithNameOrLastname/López`:
+
+<img src='img/test-challenge_1-2.png'>
+
+La petición se realizó correctamente y como se puede ver solo se encuentra un usuario registrado con ese apellido. En caso de enviar un argumento con un nombre o apellido que no contenga ningún usuario registrado, se retornará una lista vacía por parte de la aplicación como se ve a continuación:
+
+<img src='img/test-challenge_1-3.png'>
+
+#### - Find Users Created After
+
+Para validar esta consulta y encontrar a los usuarios registrados a partir de una fecha específica esta debe especificarse como parámetro en la dirección web, que al igual que en el anterior caso especifíca la consulta a realizar y agrega el parámetro necesario para los requerimientos de la consulta, en este caso se realizó una petición `GET` a la dirección `http://localhost:8080/api/v2/users/findUsersCreatedAfter/2022-09-07` que consulta los usuarios registrados a partir del día `2022-09-07`:
+
+<img src='img/test-challenge_2.png'>
+
+En este caso los dos usuarios se registraron después de la fecha seleccionada, si realizamos una consulta con una fecha posterior a la de todos los registros realizados obtenemos una lista vacía, por ejemplo si se realiza una petición `GET` a `http://localhost:8080/api/v2/users/findUsersCreatedAfter/2022-09-09` se obtiene una lista vacía como se puede ver a continuacipon:
+
+<img src='img/test-challenge_2-2.png'>
