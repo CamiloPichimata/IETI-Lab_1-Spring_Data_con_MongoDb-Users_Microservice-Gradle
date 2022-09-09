@@ -25,7 +25,6 @@ public class UserServiceMongoDB implements UserService {
         try {
             userRepository.insert(user);
             Optional<User> userTemp = userRepository.findById(user.getId());
-            System.out.println("User Registered: " + userTemp);
             return userTemp.orElse(null);
         } catch (DuplicateKeyException e) {
             System.out.println("The specified id is already registered");
@@ -78,7 +77,7 @@ public class UserServiceMongoDB implements UserService {
     }
 
     @Override
-    public List<User> findUsersCreatedAfter(Date startDate) {
+    public List<User> findUsersCreatedAfter(String startDate) {
         return userRepository.findByCreatedAtAfter(startDate);
         //return null;
     }

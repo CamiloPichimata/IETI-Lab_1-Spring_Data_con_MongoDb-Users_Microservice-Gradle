@@ -131,7 +131,7 @@ public class UserController {
     }
 
     @GetMapping("/api/v2/users/findUsersCreatedAfter/{startDate}")
-    public ResponseEntity<List<UserDto>> findUsersCreatedAfter (@PathVariable Date startDate) {
+    public ResponseEntity<List<UserDto>> findUsersCreatedAfter (@PathVariable String startDate) {
         try {
             List<User> users = userService.findUsersCreatedAfter(startDate);
             ArrayList<UserDto> data = new ArrayList<UserDto>();

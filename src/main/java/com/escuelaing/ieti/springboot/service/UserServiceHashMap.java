@@ -51,7 +51,7 @@ public class UserServiceHashMap implements UserService{
     }
 
     @Override
-    public List<User> findUsersCreatedAfter(Date startDate) {
+    public List<User> findUsersCreatedAfter(String startDate) {
         throw new UnsupportedOperationException();
     }
 }
